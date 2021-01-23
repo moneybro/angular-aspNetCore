@@ -1,0 +1,63 @@
+<h1>Форма заполнения параметров</h1>
+
+<div class="container">
+  <form action=# method="post">
+    <div class="mb-2 d-flex">
+      <label class="col-3">Адрес</label>
+      <select class="col-6" name="adress">
+        <option *ngFor="let adr of al">{{adr}}</option>
+      </select>
+    </div>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Квартира номер:</label>
+      <input class="col-6" type="text" name="roomNumber" value="" placeholder="0" />
+    </div>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Шкаф</label>
+      <select class="col-6" name="boxType">
+        <option>Навесной Шнайдер</option>
+        <option>Навесной ABB</option>
+        <option>Встроенный Шнайдер</option>
+        <option>Встроенный ABB</option>
+      </select>
+    </div>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Общее количество кабеля, м</label>
+      <input class="col-6" type="text" name="holeCable" value="" placeholder="0" #holeCableInp
+             (blur)="holeCableEntered(holeCableInp.value)" />
+    </div>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Вводной кабель 2шт, м</label>
+      <input class="col-6" type="text" name="inputCable" value="" placeholder="0" #inputCableInp
+             (blur)="inputCableEntered(inputCableInp.value)" />
+    </div>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Количество розеток</label>
+      <input class="col-6" type="text" name="rj45Count" value="" placeholder="0" />
+    </div>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Короб 100*50, м</label>
+      <input class="col-6" type="text" name="korobCount" value="" placeholder="0" />
+    </div>
+    <button type="button" (click)="borozdyCountAction()">посчитать борозды</button>
+    <!-- <input type="submit" value="расчитать" /> -->
+    <hr>
+    <p>Количество борозд {{borozdyCount}}</p>
+    <p>{{ holeCable }}</p>
+    <p>{{ inputCable }}</p>
+  </form>
+
+
+</div>
+
+
+<div class="card" *ngFor="let todo of todos">
+  <p>
+    <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
+    <span>
+      <button class="btn btn-danger">Удалить</button>
+      <button class="btn btn-dark" [disabled]="todo.completed">Завершить</button>
+    </span>
+  </p>
+
+</div>

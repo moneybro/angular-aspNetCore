@@ -1,0 +1,21 @@
+<h1>Counter</h1>
+
+<p>Work with <strong>SERVICE</strong> counter</p>
+
+
+<div class="card mb-3">
+  <p aria-live="polite">App count: <strong>{{ appCounterService.counter }}</strong></p>
+  <div class="container d-flex justify-content-between pb-2">
+    <button class="btn btn-primary col-sm-6" (click)="appCounterService.increase()">Increment</button>
+    <button class="btn btn-primary col-sm-6" (click)="appCounterService.decrease()">Decrement</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <p aria-live="polite">Local count: <strong>{{ localCounterService.counter }}</strong></p>
+    <div class="container d-flex justify-content-between pb-2">
+      <button class="btn btn-primary col-sm-6" (click)="localCounterService.increase()">Increment</button>
+      <p class="border" style="width: 10px"></p>
+      <button class="btn btn-primary col-sm-6" (click)="localCounterService.decrease()">Decrement</button>
+    </div>
+  </div>

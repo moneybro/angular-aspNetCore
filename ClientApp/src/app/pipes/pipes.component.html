@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Angular pipes</h1>
+
+  <h3>Async pipe</h3>
+  <p>wait for int... {{ p | async }}</p>
+  <p>Date: {{date2 | async}}</p>
+  <hr />
+  <p>{{ e | number:'1.1-5'}}</p>
+  <p>{{ e | number:'3.1-2'}}</p>
+  <p>{{ e | number:'1.0'}}</p>
+  <p>{{ e | number:'1.0-0'}}</p>
+  <p>{{str}}</p>
+  <p>{{str | uppercase}}</p>
+  <p>{{str | uppercase | lowercase}}</p>
+  <p>{{str | titlecase | slice:1:5}}</p>
+  <p>{{str | titlecase | slice:1:-2}}</p>
+
+  <p>{{date | date:'short'}}</p>
+  <p>{{date | date:'d.M.yy HH:mm:ss'}}</p>
+  <hr />
+  <p>{{float}}</p>
+  <p>{{float | currency}}</p>
+  <p>{{float | percent:'2.0-0'}}</p>
+  <hr />
+  <pre>{{obj | json}}</pre>
+  <p>{{ obj.c.f}}</p>
+  <hr />
+  <p>{{10 | mult:2}}</p>
+  <p>{{10 | mult:20}}</p>
+  <p>{{10 | mult:3}}</p>
+  <p>{{10 | mult:5}}</p>
+  <p>{{10 | mult:67}}</p>
+  <p>{{10 | mult:8}}</p>
+  <hr />
+  <p>{{'Hello              world                 '| exMarks}}</p>
+</div>

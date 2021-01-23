@@ -1,0 +1,17 @@
+.form-control{
+    .validation{
+      color: red
+    }
+}
+
+
+
+input{
+  &.ng-invalid.ng-touched {
+    border: 3px solid red;
+    border-radius: 3px
+  }
+  &.ng-valid {
+    border: 1px solid green
+  }
+}

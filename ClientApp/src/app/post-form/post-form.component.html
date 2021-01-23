@@ -1,0 +1,28 @@
+<div>
+  <p>New post ID: {{newPostId}}</p>
+  <input type="text"
+         class="form-control mb-1"
+         placeholder="Title..."
+         [(ngModel)]="title"
+         #titleInput />
+  <input type="text"
+         class="form-control mb-1"
+         placeholder="Text..."
+         [(ngModel)]="text" />
+
+  <button class="btn btn-primary"
+          (click)="addPost()"
+          (onAdd)="updatePosts()">
+    Add post
+  </button>
+
+  <button class="btn btn-primary ml-1"
+          (click)="focusTitle()">
+    Focus title
+  </button>
+
+  <hr />
+
+  <app-post *ngFor="let p of posts"
+            [post]="p"></app-post>
+</div>

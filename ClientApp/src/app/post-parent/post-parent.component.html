@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Angular Components</h1>
+  <h3>Subheader</h3>
+
+  <app-post-form (onAdd)="updatePosts($event)"
+                 [(newPostId)]="maxNum"></app-post-form>
+
+  <label>Posts filter</label>
+  <input class="form-control mb-1 ng-pristine ng-valid ng-touched"
+         type="text"
+         [(ngModel)]="search"
+         value=""
+         placeholder="Posts filter" />
+  <button
+          class="btn mr-1"
+          [ngClass]="{
+          'btn-primary': searchField === 'title' ? false : true,
+          'btn-success': searchField === 'title' ? true : false}"
+          (click)="searchField = 'title'"
+          >
+    Title
+  </button>
+  <button
+          class="btn"
+          [ngClass]="{
+          'btn-primary': searchField === 'text' ? false : true,
+          'btn-success': searchField === 'text' ? true : false}"
+          (click)="searchField = 'text'"
+          >
+    Text
+  </button>
+
+
+
+  <p [ngClass]="{
+  red: bgToggle,
+  blue: !bgToggle
+}">здесь по событию менются классы для параграфа</p>
+
+
+
+
+  <app-post *ngFor="let p of posts | filter:search:searchField"
+            [post]="p"
+            (onRemove)="removePost($event)">
+    <div #info>
+      <small *ngIf="p.text.length > 10; else short">Пост №{{p.id}} длинный</small>
+      <ng-template #short>
+        <small>Пост №{{p.id}} короткий</small>
+      </ng-template>
+    </div>
+  </app-post>
+</div>
