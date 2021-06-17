@@ -1,42 +1,48 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-//export interface Todo {
-//  completed: boolean
-//  title: string
-//  id?: number
-//}
-
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-input-form',
   templateUrl: './input-form.component.html',
-  styleUrls: ['./input-form.component.css']
+  styleUrls: ['./input-form.component.scss']
 })
+
 export class InputFormComponent {
-
- // todos: Todo[] = []
-
-//  constructor(private http: HttpClient) { }
-
-  //ngOnInit(): void {
-  //  this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=5')
-  //    .subscribe(todos => {
-  //      console.log("response", todos);
-  //    this.todos = todos
-  //  })
-  //}
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<adrList[]>("https://localhost:5001/api/AddressesListValues")
+    const hosting = environment.hostingUrl
+    //this.http.get<buildingObj[]>("http://95.31.18.248:8089/api/AddressesListValues")   // on web-serv-mini
+    //this.http.get<buildingObj[]>("https://localhost:5001/api/AddressesListValues")
+    this.http.get<buildingObj[]>(hosting + "/api/AddressesListValues")
       .subscribe(result => {
         this.al = result
     })
   }
 
-  public al: adrList[];
+  public al: buildingObj[];
+
+  hasSks: boolean = false
+  txtColor: string = ""
+  selectedBuildingType: string = ""
+
+
+  selectedBuildingChanged(e: number) {
+    e--
+    if (this.al[e].sks === "+") {
+      this.hasSks = true
+      this.txtColor = 'green'
+
+    } else {
+      this.hasSks = false
+      this.txtColor = 'red'
+    };
+
+    this.selectedBuildingType = this.al[e].buildingType
+
+  }
 
   holeCable: number = 0;
   inputCable: number = 0;
@@ -51,8 +57,6 @@ export class InputFormComponent {
   }
 
   inputCableEntered(val: number) {
-    console.log("hole:" + this.holeCable)
-    console.log("val:" + val)
     this.inputCable = val
   }
 
@@ -62,6 +66,9 @@ export class InputFormComponent {
 
 }
 
-interface adrList {
+interface buildingObj {
+  id: number;
   name: string;
+  buildingType: string;
+  sks: string;
 }

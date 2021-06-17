@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DePortal.Classes
+namespace de_ot_portal.Classes
 {
     public class CountProperty
     {

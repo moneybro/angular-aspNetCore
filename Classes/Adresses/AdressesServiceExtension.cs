@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace angular_aspNetCore_basics.Classes.Adresses
+namespace de_ot_portal.Classes.Addresses
 {
     public static class AdressesServiceExtension
     {
 
         public static IServiceCollection AddAdresses(this IServiceCollection services)
         {
-            services.AddScoped<IAdresses, AdrFromJSON>();
+            services.AddScoped<IAddresses, AdrFromJSON>();
             return services;
         }
     }

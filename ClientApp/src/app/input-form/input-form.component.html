@@ -1,12 +1,18 @@
 <h1>Форма заполнения параметров</h1>
 
-<div class="container">
+<div class="content">
   <form action=# method="post">
     <div class="mb-2 d-flex">
-      <label class="col-3">Адрес</label>
-      <select class="col-6" name="adress">
-        <option *ngFor="let adr of al">{{adr}}</option>
+      <label class="col-3"
+             [ngStyle] ="{color: txtColor}"
+             >Адрес {{hasSks ? "(есть скс)" : "(нет скс)"}}</label>
+      <select class="col-6" name="adress" (change)="selectedBuildingChanged(adrId.value)" #adrId>
+        <option *ngFor="let adr of al" [value]="adr.id">{{adr.name}}</option>
       </select>
+      <div class="col=3 ml-3">
+        <a href=""></a>
+      {{selectedBuildingType}}
+      </div>
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Квартира номер:</label>
@@ -51,7 +57,7 @@
 </div>
 
 
-<div class="card" *ngFor="let todo of todos">
+<!--<div class="card" *ngFor="let todo of todos">
   <p>
     <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
     <span>
@@ -60,4 +66,6 @@
     </span>
   </p>
 
-</div>
+</div>-->
+
+

@@ -5,9 +5,14 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using angular_aspNetCore_basics.Classes.Adresses;
+using de_ot_portal.Classes.Addresses;
+using de_ot_portal.Classes.Taprs;
+using de_ot_portal.Classes.Users;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
-namespace angular_aspNetCore_basics
+namespace de_ot_portal
 {
     public class Startup
     {
@@ -23,6 +28,8 @@ namespace angular_aspNetCore_basics
         {
             services.AddControllersWithViews();
             services.AddAdresses();
+            services.AddTaprs();
+            services.AddUsers();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -45,7 +52,19 @@ namespace angular_aspNetCore_basics
             }
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
+
+            app.UseFileServer(new FileServerOptions
+            {
+                EnableDirectoryBrowsing = true,
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\taprs")),
+                RequestPath = new PathString("/api/taprs"),
+                EnableDefaultFiles = false
+            });
+
+
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();

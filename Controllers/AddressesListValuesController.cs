@@ -3,31 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using angular_aspNetCore_basics.Classes.Adresses;
+using de_ot_portal.Classes.Addresses;
+using de_ot_portal.Classes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace angular_aspNetCore_basics.Controllers
+namespace de_ot_portal.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/AddressesListValues")]
     
     public class AddressesListValuesController : ControllerBase
     {
-        //// GET: api/AddressesListValuesController
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        // GET: api/AddressesListValuesController
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Address> Get()
         {
             AdrFromJSON afj = new AdrFromJSON();
 
-            return afj.getAddrListJson();
+            var result = afj.GetAddrList();
+
+            return afj.GetAddrList();
         }
 
 

@@ -4,47 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using de_ot_portal.Classes;
 
-namespace angular_aspNetCore_basics.Classes.Adresses
+namespace de_ot_portal.Classes.Addresses
 {
-    public class AdrFromJSON : IAdresses
+    public class AdrFromJSON : IAddresses
     {
-        public Dictionary<int, string> getAdrDict()
+        List<Address> buildings = new List<Address>();
+        public List<Address> GetAddrList()
         {
-            Dictionary<int, string> adrDict = new Dictionary<int, string>();
-
             var jsonText = File.ReadAllText(@"Classes\Adresses\adresses.json");
-            var adrDictObj = JsonConvert.DeserializeObject<List<adrList>>(jsonText);
 
-            Console.WriteLine(adrDictObj.Count);
-
-            foreach (var item in adrDictObj)
-            {
-                adrDict.Add(item.id, item.name);
-            }
-
-            return adrDict;
-        }
-
-        public IEnumerable<string> getAddrListJson()
-        {
-            List<string> adrArr = new List<string>();
-            var jsonText = File.ReadAllText(@"Classes\Adresses\adresses.json");
-            var adrDictObj = JsonConvert.DeserializeObject<List<adrList>>(jsonText);
-            foreach (var item in adrDictObj)
-            {
-                adrArr.Add(item.name);
-            }
-            return adrArr;
-        }
-
-        public class adrList
-        {
-            public int id { get; set; }
-            public string name { get; set; }
-
-            //public int id;
-            //public string name;
+            buildings = JsonConvert.DeserializeObject<List<Address>>(jsonText);
+            return buildings;
         }
     }
 }

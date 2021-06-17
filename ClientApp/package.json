@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build dev": "ng build dev",
+    "build": "ng build --prod",
     "build:ssr": "ng run angular_aspNetCore_basics:server:dev",
     "test": "ng test",
     "lint": "ng lint",
