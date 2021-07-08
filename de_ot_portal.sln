@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "de_ot_portal", "de_ot_portal.csproj", "{6D180C48-0A87-4CE8-8A4B-5E30737E6A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationsToSqlDbFromLocalDb", "..\MigrationsToSqlDbFromLocalDb\MigrationsToSqlDbFromLocalDb.csproj", "{6A823BA6-87F5-4867-B9B1-0BFBC18327CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationsToSqlDbFromLocalDb", "..\MigrationsToSqlDbFromLocalDb\MigrationsToSqlDbFromLocalDb.csproj", "{6A823BA6-87F5-4867-B9B1-0BFBC18327CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
