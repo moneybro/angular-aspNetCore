@@ -2,29 +2,32 @@
 using de_ot_portal.Classes;
 using System.IO;
 using System.Threading.Tasks;
+using de_ot_portal.Classes.Addresses;
 
 namespace de_ot_portal.Contexts
 {
     public class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public ApplicationContext()
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    //optionsBuilder.UseSqlServer("Server=web-serv-mini\\mssqllocaldb;Database=DEportalSQLDB;User Id =deportalapp;Password=1234567890");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseSqlServer("Server=web-serv-mini\\mssqllocaldb;Database=DEportalSQLDB;User Id =deportalapp;Password=1234567890");
 
-        //    //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=DEportalDB;Trusted_Connection=True;");
-        //}
+            //optionsBuilder.UseSqlServer(DbConnectionOptionsGetter.getConnectionString());
+
+        }
 
         public override void Dispose()
         {
             base.Dispose();
-            DbConnectionOptionsGetter.streamWtiterInstanceHolder.Dispose();
+            if (DbConnectionOptionsGetter.streamWtiterInstanceHolder != null) DbConnectionOptionsGetter.streamWtiterInstanceHolder.Dispose();
         }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)

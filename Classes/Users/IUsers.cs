@@ -10,5 +10,6 @@ namespace de_ot_portal.Classes
     public interface IUsers
     {
         List<User> GetUsers();
+        void createDB();
     }
 }

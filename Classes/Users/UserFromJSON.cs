@@ -25,5 +25,10 @@ namespace de_ot_portal.Classes.Users
             var users = GetUsers();
             return users.Find(user => user.Id == id);
         }
+
+        public void createDB()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using de_ot_portal.Classes.Users;
 using de_ot_portal.Classes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,15 +13,17 @@ namespace de_ot_portal.Controllers
     
     public class UserController : ControllerBase
     {
-        //UserFromJSON ufj = new UserFromJSON();
-        UserFromDB ufdb = new UserFromDB();
+
+        private readonly IUsers _users;
+        public UserController(IUsers users)
+        {
+            _users = users;
+        }
 
         [HttpGet]
         public List<User> Get()
         {
-            //Redirect("api/User/0");
-            
-            return ufdb.GetUsers();
+            return _users.GetUsers();
         }
 
 
@@ -38,7 +37,7 @@ namespace de_ot_portal.Controllers
         [HttpGet("crdb")]
         public void crdb()
         {
-            ufdb.createDB();
+            _users.createDB();
         }
 
         // POST api/<UserController>

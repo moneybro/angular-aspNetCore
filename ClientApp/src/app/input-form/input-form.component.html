@@ -4,27 +4,23 @@
   <form action=# method="post">
     <div class="mb-2 d-flex">
       <label class="col-3"
-             [ngStyle] ="{color: txtColor}"
-             >Адрес {{hasSks ? "(есть скс)" : "(нет скс)"}}</label>
+             [ngStyle]="{color: txtColor}">Адрес {{hasSks ? "(есть скс)" : "(нет скс)"}}</label>
       <select class="col-6" name="adress" (change)="selectedBuildingChanged(adrId.value)" #adrId>
         <option *ngFor="let adr of al" [value]="adr.id">{{adr.name}}</option>
       </select>
       <div class="col=3 ml-3">
         <a href=""></a>
-      {{selectedBuildingType}}
+        {{selectedBuildingType}}
       </div>
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Квартира номер:</label>
-      <input class="col-6" type="text" name="roomNumber" value="" placeholder="0" />
+      <input class="col-6" type="text" placeholder="0" (input)="placementValueChanged($event)"/>
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Шкаф</label>
-      <select class="col-6" name="boxType">
-        <option>Навесной Шнайдер</option>
-        <option>Навесной ABB</option>
-        <option>Встроенный Шнайдер</option>
-        <option>Встроенный ABB</option>
+      <select class="col-6" name="boxType" (change)="selectedBoxChanged(bId.value)" #bId>
+        <option *ngFor="let b of boxes" [value]="b.id">{{b.descr}}</option>
       </select>
     </div>
     <div class="mb-2 d-flex">
@@ -45,27 +41,31 @@
       <label class="col-3">Короб 100*50, м</label>
       <input class="col-6" type="text" name="korobCount" value="" placeholder="0" />
     </div>
-    <button type="button" (click)="borozdyCountAction()">посчитать борозды</button>
+    <div class="mb-2 d-flex">
+      <label class="col-3">Подрядчик</label>
+      <select class="col-6" name="podryadchikName">
+        <option></option>
+        <option>ООО "ИНПРЕДСЕРВИС"</option>
+        <option>ООО "Контур"</option>
+        <option>ООО " Надежда Евростиль"</option>
+        <option>ООО "ТАКТ"</option>
+        <option>ООО "РОСТ"</option>
+        <option>ООО "Технострой"</option>
+        <option>ООО "СпецИнтерМонтаж"</option>
+      </select>
+    </div>
+
+
     <!-- <input type="submit" value="расчитать" /> -->
-    <hr>
+    <!--<hr>
     <p>Количество борозд {{borozdyCount}}</p>
     <p>{{ holeCable }}</p>
-    <p>{{ inputCable }}</p>
+    <p>{{ inputCable }}</p>-->
   </form>
 
 
 </div>
 
-
-<!--<div class="card" *ngFor="let todo of todos">
-  <p>
-    <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
-    <span>
-      <button class="btn btn-danger">Удалить</button>
-      <button class="btn btn-dark" [disabled]="todo.completed">Завершить</button>
-    </span>
-  </p>
-
-</div>-->
-
+<p>Помещение: {{selectedAddress.name}}, {{placement}}</p>
+<p>Шкаф: {{selectedBox.fullName}}</p>
 
