@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { BoxesService, BoxType } from './interfaces/boxes.service';
+import { Post, PostsService } from './interfaces/posts.service';
 
 @Component({
   selector: 'app-input-form',
@@ -10,24 +12,37 @@ import { environment } from '../../environments/environment';
 
 export class InputFormComponent {
 
-  constructor(private http: HttpClient) { }
+  public al: buildingObj[];
+  selectedAddress: buildingObj = null
+  placement: string = ""
+  holeCable: number = 0;
+  inputCable: number = 0;
+  borozdyCount: number = 0;
+
+  hasSks: boolean = false;
+  txtColor: string = "";
+  selectedBuildingType: string = "";
+  boxes: BoxType[];
+  selectedBox: BoxType
+
+
+  constructor(
+    private http: HttpClient,
+    private boxesService: BoxesService
+  ) {
+    this.boxes = boxesService.getBoxes()
+    this.selectedBox = this.boxes[0]
+  }
 
   ngOnInit(): void {
     const hosting = environment.hostingUrl
-    //this.http.get<buildingObj[]>("http://95.31.18.248:8089/api/AddressesListValues")   // on web-serv-mini
-    //this.http.get<buildingObj[]>("https://localhost:5001/api/AddressesListValues")
+    //const hosting = "https://localhost:44322"
     this.http.get<buildingObj[]>(hosting + "/api/AddressesListValues")
       .subscribe(result => {
         this.al = result
-    })
+        this.selectedAddress = this.al[0]
+      })
   }
-
-  public al: buildingObj[];
-
-  hasSks: boolean = false
-  txtColor: string = ""
-  selectedBuildingType: string = ""
-
 
   selectedBuildingChanged(e: number) {
     e--
@@ -39,14 +54,22 @@ export class InputFormComponent {
       this.hasSks = false
       this.txtColor = 'red'
     };
-
     this.selectedBuildingType = this.al[e].buildingType
-
+    e++
+    this.selectedAddress = this.al.find(a => a.id === e)
   }
 
-  holeCable: number = 0;
-  inputCable: number = 0;
-  borozdyCount: number = 0;
+  placementValueChanged(event) {
+    this.placement = event.target.value
+  }
+
+  selectedBoxChanged(id: number) {
+    this.selectedBox = this.boxes.find(b => b.id == id)
+  }
+
+  getboxbyid(e: number) {
+    this.selectedBox = this.boxes.find(x => x.id === e)
+  }
 
   borozdyCountAction() {
     this.borozdyCount = (this.holeCable - this.inputCable) / 500
@@ -63,7 +86,6 @@ export class InputFormComponent {
   resetInputCable() {
     this.inputCable = 0
   }
-
 }
 
 interface buildingObj {
@@ -72,3 +94,8 @@ interface buildingObj {
   buildingType: string;
   sks: string;
 }
+
+
+
+
+

@@ -7,7 +7,7 @@ namespace de_ot_portal.Contexts
 {
     public static class DbConnectionOptionsGetter
     {
-        public static DbContextOptions<ApplicationContext> getOptions()
+        public static string getConnectionString()
         {
             var builder = new ConfigurationBuilder();
             // установка пути к текущему каталогу
@@ -17,15 +17,21 @@ namespace de_ot_portal.Contexts
             // создаем конфигурацию
             var config = builder.Build();
             // получаем строку подключения
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString("localdbConnection");
+            return connectionString;
+        }
+        public static DbContextOptions<ApplicationContext> getOptions()
+        {
+            string connectionString = getConnectionString();
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
 
             optionsBuilder.LogTo(System.Console.WriteLine);
             //optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
             var ls = new ContextLogger();
-            optionsBuilder.LogTo(ls.streamWriter.WriteLine, new[] { RelationalEventId.CommandExecuted });
             streamWtiterInstanceHolder = ls.streamWriter;
+            optionsBuilder.LogTo(streamWtiterInstanceHolder.WriteLine, new[] { RelationalEventId.CommandExecuted });
+            
 
             var options = optionsBuilder
                 .UseSqlServer(connectionString)

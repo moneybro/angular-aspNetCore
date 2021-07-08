@@ -35,8 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Classes\Adresses\Placements\" />
     <Folder Include="ClientApp\dist\" />
+    <Folder Include="Contexts\localdb\" />
+    <Folder Include="Contexts\sqldb\" />
+    <Folder Include="Migrations\localdb\" />
+    <Folder Include="Migrations\sqldb\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
