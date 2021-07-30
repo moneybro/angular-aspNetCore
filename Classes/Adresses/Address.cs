@@ -11,5 +11,7 @@ namespace de_ot_portal.Classes.Addresses
         public string? name { get; set; }
         public string? buildingType { get; set; }
         public string? sks { get; set; }
+        public string? taprs { get; set; }
+        public int? catalogPage { get; set; }
     }
 }

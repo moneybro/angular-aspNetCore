@@ -35,6 +35,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\input-form\interfaces\addressTypeLinks.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\app\input-form\interfaces\addressTypeLinks.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\dist\" />
     <Folder Include="Contexts\localdb\" />
     <Folder Include="Contexts\sqldb\" />

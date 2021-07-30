@@ -9,8 +9,12 @@
         <option *ngFor="let adr of al" [value]="adr.id">{{adr.name}}</option>
       </select>
       <div class="col=3 ml-3">
-        <a href=""></a>
-        {{selectedBuildingType}}
+        <p *ngIf="selectedBuildingTypeLink == 'empty'">{{selectedBuildingType}}</p>
+        <a href={{selectedBuildingTypeLink}} *ngIf="selectedBuildingTypeLink != 'empty'" target="_blank">{{selectedBuildingType}}</a>
+        <div>
+          <a *ngFor="let t of taprs" href={{t.link}} target="_blank">{{t.name}} </a>
+        </div>
+        
       </div>
     </div>
     <div class="mb-2 d-flex">
@@ -66,6 +70,6 @@
 
 </div>
 
-<p>Помещение: {{selectedAddress.name}}, {{placement}}</p>
+<p>Помещение: {{selectedAddressName}}, {{placement}}</p>
 <p>Шкаф: {{selectedBox.fullName}}</p>
 

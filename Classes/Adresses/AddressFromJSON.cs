@@ -20,7 +20,7 @@ namespace de_ot_portal.Classes.Addresses
         {
             List<Address> u = new List<Address>();
             
-            var jsonText = File.ReadAllText(@"Classes\Addresss\Addresss.json");
+            var jsonText = File.ReadAllText(@"Classes\Addresses\Addresses.json");
             u = JsonConvert.DeserializeObject<List<Address>>(jsonText);
             return u;
         }

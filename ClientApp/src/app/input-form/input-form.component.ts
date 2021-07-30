@@ -2,7 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BoxesService, BoxType } from './interfaces/boxes.service';
-import { Post, PostsService } from './interfaces/posts.service';
+import { AddressTypeLinkService, AddressTypeLink } from './interfaces/addressTypeLink.service';
+import { TaprService, Tapr } from './interfaces/taprs.service';
+
 
 @Component({
   selector: 'app-input-form',
@@ -13,7 +15,10 @@ import { Post, PostsService } from './interfaces/posts.service';
 export class InputFormComponent {
 
   public al: buildingObj[];
+
   selectedAddress: buildingObj = null
+  selectedAddressName: string = ""
+  selectedAddressTaprsLinks: string [] = null
   placement: string = ""
   holeCable: number = 0;
   inputCable: number = 0;
@@ -22,13 +27,18 @@ export class InputFormComponent {
   hasSks: boolean = false;
   txtColor: string = "";
   selectedBuildingType: string = "";
-  boxes: BoxType[];
-  selectedBox: BoxType
+  selectedBuildingTypeLink: string = "";
+  adrTypeLink: string;
 
+  boxes: BoxType[];
+  selectedBox: BoxType;
+  taprs: Tapr[]
 
   constructor(
     private http: HttpClient,
-    private boxesService: BoxesService
+    private boxesService: BoxesService,
+    public adrTypeLinkService: AddressTypeLinkService,
+    private taprservice: TaprService
   ) {
     this.boxes = boxesService.getBoxes()
     this.selectedBox = this.boxes[0]
@@ -41,6 +51,9 @@ export class InputFormComponent {
       .subscribe(result => {
         this.al = result
         this.selectedAddress = this.al[0]
+        this.selectedAddressName = this.selectedAddress.name
+        this.selectedBuildingChanged(1) // чтобы при старте приложения сразу был виден тип здания
+        this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
       })
   }
 
@@ -57,6 +70,21 @@ export class InputFormComponent {
     this.selectedBuildingType = this.al[e].buildingType
     e++
     this.selectedAddress = this.al.find(a => a.id === e)
+
+    this.gettaprs()
+    //console.log(this.selectedAddress.taprs)
+
+    this.selectedAddressName = this.al.find(a => a.id === e).name
+    this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
+    this.selectedBuildingTypeLink = this.adrTypeLink
+  }
+
+  gettaprs() {
+    this.taprs = this.taprservice.getTaprs(this.selectedBuildingType, this.selectedAddress.taprs)
+  }
+
+  gettaprskinks2() {
+    this.taprservice.changeLangRu2En("1а2+б3в4гжз(этаж)")
   }
 
   placementValueChanged(event) {
@@ -93,6 +121,8 @@ interface buildingObj {
   name: string;
   buildingType: string;
   sks: string;
+  taprs: string;
+  catalogPage: number;
 }
 
 
