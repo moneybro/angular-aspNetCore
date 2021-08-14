@@ -3,6 +3,7 @@ using de_ot_portal.Classes;
 using System.IO;
 using System.Threading.Tasks;
 using de_ot_portal.Classes.Addresses;
+using de_ot_portal.Classes.Adresses.Placements;
 
 namespace de_ot_portal.Contexts
 {
@@ -10,6 +11,7 @@ namespace de_ot_portal.Contexts
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Placement> Placements { get; set; }
 
         public ApplicationContext()
         {

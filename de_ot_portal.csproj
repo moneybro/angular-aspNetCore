@@ -29,8 +29,16 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Migrations\localdb\**" />
+    <Compile Remove="Migrations\sqldb\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Migrations\localdb\**" />
+    <Content Remove="Migrations\sqldb\**" />
+    <EmbeddedResource Remove="Migrations\localdb\**" />
+    <EmbeddedResource Remove="Migrations\sqldb\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Migrations\localdb\**" />
+    <None Remove="Migrations\sqldb\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -50,8 +58,6 @@
     <Folder Include="ClientApp\dist\" />
     <Folder Include="Contexts\localdb\" />
     <Folder Include="Contexts\sqldb\" />
-    <Folder Include="Migrations\localdb\" />
-    <Folder Include="Migrations\sqldb\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

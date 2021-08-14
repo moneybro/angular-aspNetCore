@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "de_ot_portal", "de_ot_porta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationsToSqlDbFromLocalDb", "..\MigrationsToSqlDbFromLocalDb\MigrationsToSqlDbFromLocalDb.csproj", "{6A823BA6-87F5-4867-B9B1-0BFBC18327CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressesFromJsonToDb", "..\addressesFromJsonToDb\addressesFromJsonToDb.csproj", "{FCB94660-60B3-41AC-8BA0-9C53996B4484}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6D180C48-0A87-4CE8-8A4B-5E30737E6A7F} = {6D180C48-0A87-4CE8-8A4B-5E30737E6A7F}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,10 @@ Global
 		{6A823BA6-87F5-4867-B9B1-0BFBC18327CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A823BA6-87F5-4867-B9B1-0BFBC18327CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A823BA6-87F5-4867-B9B1-0BFBC18327CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB94660-60B3-41AC-8BA0-9C53996B4484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB94660-60B3-41AC-8BA0-9C53996B4484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB94660-60B3-41AC-8BA0-9C53996B4484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB94660-60B3-41AC-8BA0-9C53996B4484}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
