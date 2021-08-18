@@ -5,6 +5,16 @@ export interface AddressTypeLink {
   link: string;
 }
 
+export interface BuildingObj {
+  id: number;
+  name: string;
+  buildingType: string;
+  sks: string;
+  taprs: string;
+  catalogPage: number;
+  placements: string[];
+}
+
 @Injectable({ providedIn: 'root'})
 export class AddressTypeLinkService {
     constructor() {
@@ -17,27 +27,26 @@ export class AddressTypeLinkService {
   links: AddressTypeLink[] = [
     {
       type: "эконом",
-      link: "e_1-22_20180927"
+      link: "econom"
     },
     {
       type: "стандарт",
-      link: "s_all_20180927"
+      link: "standart"
     },
     {
       type: "комфорт",
-      link: "c_all_20180927"
+      link: "comfort"
     }
   ]
 
-
-  getAddressTypeLinkByType(type: string): string {
-    type = type.toLowerCase();
+    getAddressTypeLinkByType(selectedAddress: BuildingObj): string {
+    let type: string = ""
+    type = selectedAddress.buildingType.toLowerCase()
 
     this.tmpAddr = this.links.find(p => p.type == type)
     this.tmpAddr == null ?
       this.tmpAddrLink = "empty" :
-      this.tmpAddrLink = "/api/taprs/" + this.tmpAddr.link + ".pdf"
+      this.tmpAddrLink = "/api/taprs/" + this.tmpAddr.link + ".pdf#page=" + selectedAddress.catalogPage
     return this.tmpAddrLink
   }
-
 }

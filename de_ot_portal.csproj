@@ -29,16 +29,8 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="Migrations\localdb\**" />
-    <Compile Remove="Migrations\sqldb\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="Migrations\localdb\**" />
-    <Content Remove="Migrations\sqldb\**" />
-    <EmbeddedResource Remove="Migrations\localdb\**" />
-    <EmbeddedResource Remove="Migrations\sqldb\**" />
     <None Remove="$(SpaRoot)**" />
-    <None Remove="Migrations\localdb\**" />
-    <None Remove="Migrations\sqldb\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 

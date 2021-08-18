@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BoxesService, BoxType } from './interfaces/boxes.service';
-import { AddressTypeLinkService, AddressTypeLink } from './interfaces/addressTypeLink.service';
+import { AddressTypeLinkService, AddressTypeLink, BuildingObj } from './interfaces/addressTypeLink.service';
 import { TaprService, Tapr } from './interfaces/taprs.service';
 
 
@@ -14,9 +14,9 @@ import { TaprService, Tapr } from './interfaces/taprs.service';
 
 export class InputFormComponent {
 
-  public al: buildingObj[];
+  public al: BuildingObj[];
 
-  selectedAddress: buildingObj = null
+  selectedAddress: BuildingObj = null
   selectedAddressName: string = ""
   selectedAddressTaprsLinks: string [] = null
   placement: string = ""
@@ -47,13 +47,14 @@ export class InputFormComponent {
   ngOnInit(): void {
     const hosting = environment.hostingUrl
     //const hosting = "https://localhost:44322"
-    this.http.get<buildingObj[]>(hosting + "/api/AddressesListValues")
+    this.http.get<BuildingObj[]>(hosting + "/api/AddressesListValues")
       .subscribe(result => {
         this.al = result
         this.selectedAddress = this.al[0]
         this.selectedAddressName = this.selectedAddress.name
         this.selectedBuildingChanged(1) // чтобы при старте приложения сразу был виден тип здания
-        this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
+        //this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
+        this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedAddress)
       })
   }
 
@@ -75,7 +76,8 @@ export class InputFormComponent {
     //console.log(this.selectedAddress.taprs)
 
     this.selectedAddressName = this.al.find(a => a.id === e).name
-    this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
+    //this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
+    this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedAddress)
     this.selectedBuildingTypeLink = this.adrTypeLink
   }
 
@@ -116,14 +118,7 @@ export class InputFormComponent {
   }
 }
 
-interface buildingObj {
-  id: number;
-  name: string;
-  buildingType: string;
-  sks: string;
-  taprs: string;
-  catalogPage: number;
-}
+
 
 
 
