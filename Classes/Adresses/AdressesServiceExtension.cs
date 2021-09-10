@@ -8,7 +8,6 @@ namespace de_ot_portal.Classes.Addresses
 {
     public static class AdressesServiceExtension
     {
-
         public static IServiceCollection AddAdresses(this IServiceCollection services)
         {
             services.AddScoped<IAddresses, AdrFromJSON>();

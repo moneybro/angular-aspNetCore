@@ -26,11 +26,11 @@ namespace de_ot_portal.Contexts
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
 
-            optionsBuilder.LogTo(System.Console.WriteLine);
+            //optionsBuilder.LogTo(System.Console.WriteLine);
             //optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
-            var ls = new ContextLogger();
-            streamWtiterInstanceHolder = ls.streamWriter;
-            optionsBuilder.LogTo(streamWtiterInstanceHolder.WriteLine, new[] { RelationalEventId.CommandExecuted });
+            //var ls = new ContextLogger();
+            //streamWtiterInstanceHolder = ls.streamWriter;
+            //optionsBuilder.LogTo(streamWtiterInstanceHolder.WriteLine, new[] { RelationalEventId.CommandExecuted });
             
 
             var options = optionsBuilder

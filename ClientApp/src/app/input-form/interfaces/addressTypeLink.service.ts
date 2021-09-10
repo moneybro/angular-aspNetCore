@@ -39,14 +39,29 @@ export class AddressTypeLinkService {
     }
   ]
 
-    getAddressTypeLinkByType(selectedAddress: BuildingObj): string {
+
+  getAddressTypeLinkByType(selectedAddress: BuildingObj): string {
     let type: string = ""
+    let addrDescr: AddressTypeLink
     type = selectedAddress.buildingType.toLowerCase()
 
     this.tmpAddr = this.links.find(p => p.type == type)
+
     this.tmpAddr == null ?
       this.tmpAddrLink = "empty" :
       this.tmpAddrLink = "/api/taprs/" + this.tmpAddr.link + ".pdf#page=" + selectedAddress.catalogPage
+
+    //if (this.tmpAddr == null) 
+    //  {
+    //    addrDescr.link = "empty",
+    //    addrDescr.type = "empty"
+    //} else
+    //{
+    //  addrDescr.type = addrDescr.link // для того чтобы вернуть только тип адреса по английски
+    //  // для возврата всего пути
+    //  addrDescr.link = "/api/taprs/" + this.tmpAddr.link + ".pdf#page=" + selectedAddress.catalogPage
+    //}
+
     return this.tmpAddrLink
   }
 }

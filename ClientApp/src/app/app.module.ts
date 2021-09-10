@@ -34,6 +34,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([

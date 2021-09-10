@@ -4,14 +4,19 @@ using System.IO;
 using System.Threading.Tasks;
 using de_ot_portal.Classes.Addresses;
 using de_ot_portal.Classes.Adresses.Placements;
+using de_ot_portal.Classes.Taprs;
+using de_ot_portal.Classes.Adresses.Calculations;
 
 namespace de_ot_portal.Contexts
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Placement> Placements { get; set; }
+        
+        public DbSet<Tapr> Taprs { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Calculation> Calculations { get; set; }
 
         public ApplicationContext()
         {
@@ -36,6 +41,7 @@ namespace de_ot_portal.Contexts
             : base(options)
         {
             //setLoggerInstance(options.GetExtension<StreamWriter>);
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

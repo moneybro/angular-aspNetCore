@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -29,8 +29,16 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Contexts\localdb\**" />
+    <Compile Remove="Contexts\sqldb\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Contexts\localdb\**" />
+    <Content Remove="Contexts\sqldb\**" />
+    <EmbeddedResource Remove="Contexts\localdb\**" />
+    <EmbeddedResource Remove="Contexts\sqldb\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Contexts\localdb\**" />
+    <None Remove="Contexts\sqldb\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -48,8 +56,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\dist\" />
-    <Folder Include="Contexts\localdb\" />
-    <Folder Include="Contexts\sqldb\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

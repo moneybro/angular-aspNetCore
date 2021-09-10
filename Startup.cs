@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +10,8 @@ using de_ot_portal.Classes.Users;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using de_ot_portal.Classes.Adresses.Calculations;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace de_ot_portal
 {
@@ -30,6 +31,7 @@ namespace de_ot_portal
             services.AddAdresses();
             services.AddTaprs();
             services.AddUsers();
+            services.AddCalculations();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

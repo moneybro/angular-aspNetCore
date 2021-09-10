@@ -8,12 +8,12 @@ namespace de_ot_portal.Classes.Addresses
 {
     public class Address
     {
-        public int? Id { get; set; }
-        public string? name { get; set; }
-        public string? buildingType { get; set; }
-        public string? sks { get; set; }
-        public string? taprs { get; set; }
-        public int? catalogPage { get; set; }
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? BuildingType { get; set; }
+        public string? Sks { get; set; }
+        public string? Taprs { get; set; }
+        public int? CatalogPage { get; set; }
         public List<Placement> Placements { get; set; } = new List<Placement>();
     }
 }

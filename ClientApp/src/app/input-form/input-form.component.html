@@ -2,9 +2,9 @@
 
 <div class="content">
   <form action=# method="post">
+
     <div class="mb-2 d-flex">
-      <label class="col-3"
-             [ngStyle]="{color: txtColor}">Адрес {{hasSks ? "(есть скс)" : "(нет скс)"}}</label>
+      <label class="col-3" [ngStyle]="{color: txtColor}">Адрес {{hasSks ? "(есть скс)" : "(нет скс)"}}</label>
       <select class="col-6" name="adress" (change)="selectedBuildingChanged(adrId.value)" #adrId>
         <option *ngFor="let adr of al" [value]="adr.id">{{adr.name}}</option>
       </select>
@@ -14,13 +14,35 @@
         <div>
           <a *ngFor="let t of taprs" href={{t.link}} target="_blank">{{t.name}} </a>
         </div>
-        
+
       </div>
     </div>
+
+
     <div class="mb-2 d-flex">
-      <label class="col-3">Квартира номер:</label>
-      <input class="col-6" type="text" placeholder="0" (input)="placementValueChanged($event)"/>
+      <div class="col-3 d-flex flex-row">
+        <label class="mr-5">Помещение:</label>
+        <div class="d-flex flex-row">
+          <div class="custom-control custom-radio mr-2">
+            <input id="live" type="radio" class="custom-control-input" value="live" name="placement" [(ngModel)]="countContainer.placementType">
+            <label class="custom-control-label" for="live">жил</label>
+          </div>
+
+          <div class="custom-control custom-radio">
+            <input id="office" type="radio" class="custom-control-input" value="office" name="placement" [(ngModel)]="countContainer.placementType">
+            <label class="custom-control-label" for="office">оф</label>
+          </div>
+        </div>
+      </div>
+      <input class="col-6" type="text" placeholder="0" (input)="placementValueChanged($event)" />
     </div>
+
+    <div class="mb-2 d-flex">
+      <label class="col-3">ТАПР</label>
+      <input class="col-6" type="text" name="taprName" placeholder="не найден (ввести)"
+             (input)="taprNameEntered($event)" />
+    </div>
+
     <div class="mb-2 d-flex">
       <label class="col-3">Шкаф</label>
       <select class="col-6" name="boxType" (change)="selectedBoxChanged(bId.value)" #bId>
@@ -29,25 +51,27 @@
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Общее количество кабеля, м</label>
-      <input class="col-6" type="text" name="holeCable" value="" placeholder="0" #holeCableInp
-             (blur)="holeCableEntered(holeCableInp.value)" />
+      <input class="col-6" type="number" step=".1" name="holeCable" placeholder="0" #holeCableInp
+             (input)="holeCableEntered(holeCableInp.value)" />
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Вводной кабель 2шт, м</label>
-      <input class="col-6" type="text" name="inputCable" value="" placeholder="0" #inputCableInp
-             (blur)="inputCableEntered(inputCableInp.value)" />
+      <input class="col-6" type="number" name="inputCable" placeholder="0" #inputCableInp
+             (input)="inputCableEntered(inputCableInp.value)" />
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Количество розеток</label>
-      <input class="col-6" type="text" name="rj45Count" value="" placeholder="0" />
+      <input class="col-6" type="number" name="rj45Count" placeholder="0" #rj45Count
+             (input)="rj45CountChanged(rj45Count.value)" />
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Короб 100*50, м</label>
-      <input class="col-6" type="text" name="korobCount" value="" placeholder="0" />
+      <input class="col-6" type="text" name="korobCount" placeholder="0" #korobCount
+             (input)="korobCountChanged(korobCount.value)" />
     </div>
     <div class="mb-2 d-flex">
       <label class="col-3">Подрядчик</label>
-      <select class="col-6" name="podryadchikName">
+      <select class="col-6" name="podryadchikName" (change)="podryadchikChanged(podryadchik.value)" #podryadchik>
         <option></option>
         <option>ООО "ИНПРЕДСЕРВИС"</option>
         <option>ООО "Контур"</option>
@@ -59,17 +83,24 @@
       </select>
     </div>
 
+    <button class="btn btn-success" (click)="sendCountContainer()">отправить</button>
 
-    <!-- <input type="submit" value="расчитать" /> -->
-    <!--<hr>
-    <p>Количество борозд {{borozdyCount}}</p>
-    <p>{{ holeCable }}</p>
-    <p>{{ inputCable }}</p>-->
+    <br />
   </form>
 
+  <hr />
 
+  <p>addressId: {{countContainer.addressId}}</p>
+  <p>placementName: {{countContainer.placementName}}</p>
+  <p>placementType: {{countContainer.placementType}}</p>
+  <p>TAPR: {{taprName}}</p>
+  <p>box: {{countContainer.box}}</p>
+  <p>holeCable: {{countContainer.holeCable}}</p>
+  <p>inputCable: {{countContainer.inputCable}}</p>
+  <p>rj45Count: {{countContainer.rj45Count}}</p>
+  <p>korobCount: {{countContainer.korobCount}}</p>
+  <p>podryadchik: {{countContainer.podryadchik}}</p>
 </div>
 
-<p>Помещение: {{selectedAddressName}}, {{placement}}</p>
-<p>Шкаф: {{selectedBox.fullName}}</p>
+
 
