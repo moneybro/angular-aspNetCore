@@ -89,14 +89,6 @@ export class InputFormComponent {
       })
   }
 
-  sendparam(): void {
-    const hosting = environment.hostingUrl
-    this.http.post(hosting + "/api/dataenter", this.holeCable)
-      .subscribe(result => {
-        //JSON.stringify(this.countContainer)
-      })
-  }
-
   selectedBuildingChanged(e: number) {
     e--
     if (this.al[e].sks === "+") {
@@ -131,7 +123,7 @@ export class InputFormComponent {
   }
 
   taprNameEntered(event) {
-    this.taprName = event.target.value
+    this.countContainer.taprName = event.target.value
   }
 
   selectedBoxChanged(id: number) {

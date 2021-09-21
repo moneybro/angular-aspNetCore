@@ -12,6 +12,8 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using de_ot_portal.Classes.Adresses.Calculations;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using de_ot_portal.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace de_ot_portal
 {
@@ -22,7 +24,7 @@ namespace de_ot_portal
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,6 +34,13 @@ namespace de_ot_portal
             services.AddTaprs();
             services.AddUsers();
             services.AddCalculations();
+
+            // получаем строку подключения из файла конфигурации
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            // добавляем контекст MobileContext в качестве сервиса в приложение
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(connection));
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -42,6 +51,12 @@ namespace de_ot_portal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+            Configuration = builder.Build();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

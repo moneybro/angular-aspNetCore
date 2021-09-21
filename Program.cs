@@ -17,30 +17,19 @@ namespace de_ot_portal
     {
         public static void Main(string[] args)
         {
-            //UseConnectionStringFromJSONConfig();
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args) // создание строителя, получение экземпляра хоста 
+                .Build() // построение IHost
+                .Run();  // запуск приложения
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args)             //инициализация экземпляра строителя (builder) для создания IHostBuilder
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>(); // определение класса, который ответственнен за настройку сервера
                 });
-
-        public static ConfigurationBuilder UseConnectionStringFromJSONConfig()
-        {
-            var builder = new ConfigurationBuilder();
-            builder.SetBasePath(Directory.GetCurrentDirectory());
-            builder.AddJsonFile("appsettings.json");
-            var config = builder.Build();
-            string connString = config.GetConnectionString("DefaultConnection");
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder
-                .UseSqlServer(connString)
-                .Options;
-
-            return builder;
-        }
     }
 }

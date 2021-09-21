@@ -22,7 +22,12 @@ namespace de_ot_portal.Contexts
         {
             //Database.EnsureCreated();
         }
-
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+        {
+            //setLoggerInstance(options.GetExtension<StreamWriter>);
+            //Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=web-serv-mini\\mssqllocaldb;Database=DEportalSQLDB;User Id =deportalapp;Password=1234567890");
@@ -34,21 +39,13 @@ namespace de_ot_portal.Contexts
         public override void Dispose()
         {
             base.Dispose();
-            if (DbConnectionOptionsGetter.streamWtiterInstanceHolder != null) DbConnectionOptionsGetter.streamWtiterInstanceHolder.Dispose();
         }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
-        {
-            //setLoggerInstance(options.GetExtension<StreamWriter>);
-            //Database.EnsureDeleted();
-            Database.EnsureCreated();
-        }
+        
 
         public override async ValueTask DisposeAsync()
         {
             await base.DisposeAsync();
-            await DbConnectionOptionsGetter.streamWtiterInstanceHolder.DisposeAsync();
         }
     }
 }

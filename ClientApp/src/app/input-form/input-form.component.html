@@ -39,7 +39,7 @@
 
     <div class="mb-2 d-flex">
       <label class="col-3">ТАПР</label>
-      <input class="col-6" type="text" name="taprName" placeholder="не найден (ввести)"
+      <input class="col-6" type="text" name="taprName" placeholder="не найден (ввести)" [(ngModel)]="countContainer.taprName"
              (input)="taprNameEntered($event)" />
     </div>
 
@@ -93,7 +93,7 @@
   <p>addressId: {{countContainer.addressId}}</p>
   <p>placementName: {{countContainer.placementName}}</p>
   <p>placementType: {{countContainer.placementType}}</p>
-  <p>TAPR: {{taprName}}</p>
+  <p>TAPR: {{countContainer.taprName}}</p>
   <p>box: {{countContainer.box}}</p>
   <p>holeCable: {{countContainer.holeCable}}</p>
   <p>inputCable: {{countContainer.inputCable}}</p>

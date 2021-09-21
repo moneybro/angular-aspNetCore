@@ -9,8 +9,11 @@ namespace de_ot_portal.Classes.Users
 {
     public class UserFromDB : IUsers
     {
-        //DbContextOptions<ApplicationContext> options = DbConnectionOptionsGetter.getOptions();
-        ApplicationContext db = new ApplicationContext(DbConnectionOptionsGetter.getOptions());
+        ApplicationContext db;
+        public UserFromDB(ApplicationContext context)
+        {
+            db = context;
+        }
         public void createDB()
         {
             //Console.WriteLine("db created");

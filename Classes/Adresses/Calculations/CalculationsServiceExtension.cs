@@ -10,6 +10,7 @@ namespace de_ot_portal.Classes.Adresses.Calculations
     {
         public static IServiceCollection AddCalculations(this IServiceCollection services)
         {
+            //services.AddScoped<ICalculation, DataProcessor2Txt>();
             services.AddScoped<ICalculation, DataProcessor>();
             return services;
         }

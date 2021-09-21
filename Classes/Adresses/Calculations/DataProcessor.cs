@@ -10,7 +10,11 @@ namespace de_ot_portal.Classes.Adresses.Calculations
 {
     public class DataProcessor : ICalculation
     {
-        ApplicationContext db = new ApplicationContext(DbConnectionOptionsGetter.getOptions());
+        ApplicationContext db;
+        public DataProcessor(ApplicationContext context)
+        {
+            db = context;
+        }
         public void SortAndSaveData(RawData rd)
         {
             using (db)
