@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using de_ot_portal.Classes.Taprs;
+using Microsoft.EntityFrameworkCore;
 
 namespace de_ot_portal.Classes.Adresses.Calculations
 {
@@ -26,11 +27,19 @@ namespace de_ot_portal.Classes.Adresses.Calculations
                     Type = rd.PlacementType,
                     InputCable = rd.InputCable
                 };
-                db.Placements.Add(pl);
+                if (!(db.Placements.Where(a => a.Name.Contains(pl.Name) && a.AddressId == pl.AddressId).ToList().Count() > 0))
+                {
+                    db.Placements.Add(pl);
+                }
+                else
+                {
+                   pl.Id = db.Placements.FirstOrDefault(p => p.Name == pl.Name && p.AddressId == 31).Id;
+                    //.Where(p => p.Name == pl.Name && p.AddressId == 31);
+                }
                 db.SaveChanges();
                 Tapr tapr = new Tapr
                 {
-                    PlacementId = (int)pl.Id,
+                    Id = (int)pl.Id,
                     Type = rd.AddressType,
                     Name = rd.TaprName,
                     HoleCable = rd.HoleCable,
@@ -43,19 +52,3 @@ namespace de_ot_portal.Classes.Adresses.Calculations
         }
     }
 }
-
-
-//public int? Id { get; set; }
-//public string? Name { get; set; }
-//public string? Type { get; set; }
-//public int AddressId { get; set; }
-//public Address Address { get; set; }
-
-//public int AddressId { get; set; }
-//public string PlacemnetName { get; set; }
-//public string Box { get; set; }
-//public float HoleCable { get; set; }
-//public float InputCable { get; set; }
-//public int Rj45Count { get; set; }
-//public float KorobCount { get; set; }
-//public string Podryadchik { get; set; }

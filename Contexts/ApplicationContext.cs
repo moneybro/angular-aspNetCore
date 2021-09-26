@@ -6,6 +6,7 @@ using de_ot_portal.Classes.Addresses;
 using de_ot_portal.Classes.Adresses.Placements;
 using de_ot_portal.Classes.Taprs;
 using de_ot_portal.Classes.Adresses.Calculations;
+using de_ot_portal.Classes.Users;
 
 namespace de_ot_portal.Contexts
 {
@@ -18,6 +19,13 @@ namespace de_ot_portal.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Calculation> Calculations { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Placement>()
+        //        .HasOne(p => p.Address)
+        //        .WithMany(t => t.Placements)
+        //        .HasForeignKey(p => p.AddressId);
+        //}
         public ApplicationContext()
         {
             //Database.EnsureCreated();

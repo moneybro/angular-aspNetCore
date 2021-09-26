@@ -34,7 +34,12 @@
           </div>
         </div>
       </div>
-      <input class="col-6" type="text" placeholder="0" (input)="placementValueChanged($event)" />
+      <div class="d-flex flex-row col-6 p-0 pr-3">
+        <input id="placementNameInput" class="col-6 mr-3" type="text" placeholder="0"/>
+        <select id="placementNameSelect" class="col-6" name="placement">
+          <option *ngFor="let plc of placements" [value]="plc.name">{{plc.name}}</option>
+        </select>
+      </div>
     </div>
 
     <div class="mb-2 d-flex">

@@ -29,7 +29,7 @@ namespace de_ot_portal.Classes.Adresses.Calculations
                 };
                 Tapr tapr = new Tapr
                 {
-                    PlacementId = 123456,
+                    Id = 123456,
                     Type = rd.AddressType,
                     Name = rd.TaprName,
                     HoleCable = rd.HoleCable,
@@ -41,7 +41,7 @@ namespace de_ot_portal.Classes.Adresses.Calculations
                 pl.Type + "\r\n" +
                 pl.InputCable + "\r\n" +
                 "tapr:" + "\r\n" +
-                    tapr.PlacementId + "\r\n" +
+                    tapr.Id + "\r\n" +
                     tapr.Type + "\r\n" +
                     tapr.Name + "\r\n" +
                     tapr.HoleCable + "\r\n" +

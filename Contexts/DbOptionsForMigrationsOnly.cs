@@ -22,11 +22,11 @@ namespace de_ot_portal.Contexts
             // получаем конфигурацию из файла appsettings.json
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.SetBasePath(Directory.GetCurrentDirectory());
-            builder.AddJsonFile("appsettings.json");
+            builder.AddJsonFile("appsettings.Development.json");
             IConfigurationRoot config = builder.Build();
 
             // получаем строку подключения из файла appsettings.json
-            string connectionString = config.GetConnectionString("localdbConnection");
+            string connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString, opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds));
             return new ApplicationContext(optionsBuilder.Options);
         }

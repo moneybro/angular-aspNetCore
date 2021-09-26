@@ -12,16 +12,13 @@ namespace de_ot_portal.Controllers
     
     public class AddressesListValuesController : ControllerBase
     {
-        private readonly IAddresses _addresses;
-        public AddressesListValuesController(IAddresses addresses)
-        {
-            _addresses = addresses;
-        }
+        private readonly IAddresses addresses;
+        public AddressesListValuesController(IAddresses _addresses) => addresses = _addresses;
 
         [HttpGet]
         public List<Address> Get()
         {
-            return _addresses.GetAddrList();
+            return addresses.GetAddrList();
         }
 
         // GET api/<AddressesListValuesController>/5

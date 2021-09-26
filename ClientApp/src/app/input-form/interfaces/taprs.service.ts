@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 
 export interface Tapr {
-  name: string;     // имя по русски
-  type: string;     // тип коротко: e - econom, s - standert, c - comfort
-  number: string;   // номер тапра
-  descr: string;    // описание (там где этажи есть)
-  link: string;     // ссылка на тапр
+  name: string     // имя по русски
+  type: string     // тип коротко: e - econom, s - standert, c - comfort
+  number: string   // номер тапра
+  descr: string   // описание (там где этажи есть)
+  link: string     // ссылка на тапр
 }
+
+//public int Id { get; set; }
+//public string Type { get; set; }
+//public string Name { get; set; }
+//public float HoleCable { get; set; }
+//public int Rj45Count { get; set; }
+//public string ? SchemaPath { get; set; }
 
 @Injectable({ providedIn: 'root'})
 export class TaprService {

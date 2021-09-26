@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using de_ot_portal.Classes;
 
 
-namespace de_ot_portal.Classes
+namespace de_ot_portal.Classes.Users
 {
     public interface IUsers
     {
