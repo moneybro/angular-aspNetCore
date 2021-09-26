@@ -1,0 +1,31 @@
+<div class="container">
+  <button class="btn btn-success mb-3" (click)=us.addNewUser()>Добавить пользователя</button>
+
+  <table id="usersList" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col">ФИО</th>
+        <th scope="col">Мобильный</th>
+        <th scope="col">Внутренний</th>
+        <th scope="col">Эл. почта</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of us.users; let i=index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.id}}</td>
+        <td>{{user.fullName}}</td>
+        <td>{{user.mobPhone}}</td>
+        <td>{{user.internalPhone}}</td>
+        <td>{{user.email}}</td>
+        <td><button class="btn btn-warning fs-6" (click)=us.editUser(user.id)>edit</button></td>
+        <td><button class="btn btn-danger fs-6" (click)=us.deleteUser(user.id)>X</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -22,8 +22,6 @@ namespace de_ot_portal.Controllers
         [HttpGet]
         public void Get()
         {
-            
-            //Redirect("api/taprs/0");
         }
 
 

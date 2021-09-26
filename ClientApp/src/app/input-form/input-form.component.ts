@@ -1,10 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BoxesService, BoxType } from './interfaces/boxes.service';
 import { AddressTypeLinkService, AddressTypeLink, BuildingObj } from './interfaces/addressTypeLink.service';
 import { TaprService, Tapr } from './interfaces/taprs.service';
 import { CountConatainer, Count_containerService } from './interfaces/count_container.service';
+import { fromEvent} from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -14,20 +17,20 @@ import { CountConatainer, Count_containerService } from './interfaces/count_cont
   providers: [Count_containerService]
 })
 
-
-
-export class InputFormComponent {
+export class InputFormComponent implements OnInit {
 
   public al: BuildingObj[];
-
+  
   selectedAddress: BuildingObj = null
   selectedAddressName: string = ""
   selectedAddressTaprsLinks: string [] = null
   placement: string = ""
+  placements: object[]
   taprName: string = ""
   holeCable: number = 0;
   inputCable: number = 0;
   borozdyCount: number = 0;
+  plcInp: any
 
   hasSks: boolean = false;
   txtColor: string = "";
@@ -69,7 +72,8 @@ export class InputFormComponent {
 
   ngOnInit(): void {
     const hosting = environment.hostingUrl
-    //const hosting = "https://localhost:44322"
+    //this.http.get<buildingObj[]>("http://95.31.18.248:8089/api/users/")   // on web-serv-mini
+    //this.http.get<User[]>("http://localhost:5001/api/users/")
     this.http.get<BuildingObj[]>(hosting + "/api/AddressesListValues")
       .subscribe(result => {
         this.al = result
@@ -79,6 +83,16 @@ export class InputFormComponent {
         //this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedBuildingType)
         this.adrTypeLink = this.adrTypeLinkService.getAddressTypeLinkByType(this.selectedAddress)
       })
+
+    fromEvent(document.getElementById('placementNameInput'), 'input')
+      .pipe(
+        debounceTime(1000)
+    ).subscribe(event => this.placementValueChanged(event));
+
+    fromEvent(document.getElementById('placementNameSelect'), 'change')
+      .pipe(
+        debounceTime(1000)
+      ).subscribe(event => this.placementValueChanged(event));
   }
 
   sendCountContainer(): void {
@@ -111,15 +125,29 @@ export class InputFormComponent {
     this.selectedBuildingTypeLink = this.adrTypeLink
     this.countContainer.addressType = this.selectedAddress.buildingType.toLowerCase(); // тип здания - комфорт, стандарт, эконом
     this.countContainer.addressId = this.selectedAddress.id
+    this.getPlacementsListFromServ(this.selectedAddress.id);
   }
 
   gettaprs() {
     this.taprs = this.taprservice.getTaprs(this.selectedBuildingType, this.selectedAddress.taprs)
   }
 
-  placementValueChanged(event) {
-    this.placement = event.target.value
-    this.countContainer.placementName = event.target.value
+  getPlacementsListFromServ(adrId: number) {
+    const hosting = environment.hostingUrl
+    this.http.get<object[]>(hosting + "/api/placements/" + adrId)
+      .subscribe(result => {
+        this.placements = result;
+        console.log(this.placements)
+      })
+  }
+  
+  placementValueChanged(ev) {
+    let tmpPlc = this.placements.find(p => p["name"] === ev.target['value'])
+    if (tmpPlc != null) {
+      this.countContainer.taprName = this.placements.find(p => p["name"] === ev.target['value'])["tapr"]
+    } else {
+      console.log("помещение не найдено")
+    }
   }
 
   taprNameEntered(event) {

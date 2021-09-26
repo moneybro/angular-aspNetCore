@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User, UsersService } from '../services/users.service';
 
 @Component({
@@ -11,36 +12,49 @@ export class UserFormComponent implements OnInit {
 
   @Output() onAdd: EventEmitter<User> = new EventEmitter<User>()
 
-  constructor(private usersService: UsersService) { }
-
-  ngOnInit(): void {
-  }
-
   tmpUser: User = {
-    fullname: '',
+    fullName: '',
     email: '',
     internalPhone: '',
     mobPhone: ''
   }
+  userForm: FormGroup
 
-  addUser() {
-    //if (this.tmpUser.fullName.trim() && this.tmpUser.internalPhone.trim()) {
-    //  this.usersService.onAdd(this.tmpUser)
-    //}
-    this.usersService.addUser(this.tmpUser)
+  constructor(
+    private us: UsersService,
+    
+  ) {
+    this._createFrom()
   }
 
+  ngOnInit(): void {
+    if (this.us.userFormEditMode) {
+      this.tmpUser = this.us.tmpUser
+    }
+  }
 
-  //addPost() {
-  //  if (this.text.trim() && this.title.trim()) {
-  //    const post: Post = {
-  //      title: this.title,
-  //      text: this.text,
-  //      id: this.newPostId
-  //    }
-  //    this.onAdd.emit(post)
-  //    this.title = this.text = ''
-  //  }
-  //}
-
+  _createFrom() {
+    this.userForm = new FormGroup({
+      fullName: new FormControl('',
+        [
+          Validators.required
+        ]),
+      email: new FormControl('',
+        [
+          Validators.required,
+          Validators.email
+        ]),
+      internalPhone: new FormControl('',
+        [
+          Validators.required,
+          Validators.pattern("[0-9]{4}")
+        ]),
+      mobPhone: new FormControl('',
+        [
+          Validators.required,
+          Validators.pattern("[0-9]{10}")
+        ]),
+      password: new FormControl()
+    })
+  }
 }

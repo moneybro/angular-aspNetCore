@@ -14,6 +14,7 @@ using de_ot_portal.Classes.Adresses.Calculations;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using de_ot_portal.Contexts;
 using Microsoft.EntityFrameworkCore;
+using de_ot_portal.Classes.Adresses.Placements;
 
 namespace de_ot_portal
 {
@@ -30,7 +31,9 @@ namespace de_ot_portal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddAdresses();
+            //services.AddAdresses();
+            services.AddScoped<IAddresses, AdrFromSqlDb>();
+            services.AddScoped<IPlacements, PlacementFromSqlDb>();
             services.AddTaprs();
             services.AddUsers();
             services.AddCalculations();

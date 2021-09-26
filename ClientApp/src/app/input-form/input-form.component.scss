@@ -4,3 +4,12 @@ h1 {
 .content{
     padding: 15px
 }
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red
+  }
+
+  &.ng-valid {
+    border: 1px solid green
+  }
+}

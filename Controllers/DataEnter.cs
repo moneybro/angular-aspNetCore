@@ -29,7 +29,6 @@ namespace de_ot_portal.Controllers
         }
 
 
-
         private readonly ICalculation _calculation;
         public DataEnter(ICalculation calculation)
         {

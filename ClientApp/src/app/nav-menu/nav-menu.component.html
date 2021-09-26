@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">ОТ ДЭ портал</a>
+      <a class="navbar-brand" [routerLink]="['/']">Портал ОТ ДЭ</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
@@ -9,26 +9,23 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/input-form']">Сл. токи</a>
+            <a class="nav-link" [routerLink]="['/input-form']">СТиПД</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" href="api/taprs" target="_blank">ТАПРы</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/user-form']">Юзеры</a>
+            <a class="nav-link" [routerLink]="['/userslist']">Пользователи</a>
           </li>
           <li>
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+              <button class="btn text-muted dropdown-toggle" type="button" id="dropdownMenuButton"
                       data-bs-toggle="dropdown" aria-expanded="false">
-                pages
+                Информация
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-                  <a class="nav-link" [routerLink]="['/']">Home</a>
-                </li>
-                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-                  <a class="nav-link" [routerLink]="['/about']">About</a>
+                  <a class="nav-link" [routerLink]="['/about/author']">Об авторе</a>
                 </li>
 
               </ul>
