@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User, UsersService } from '../services/users.service';
+import { User, UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,10 +10,15 @@ import { User, UsersService } from '../services/users.service';
    
 export class UserFormComponent implements OnInit {
 
-  @Output() onAdd: EventEmitter<User> = new EventEmitter<User>()
+  //@Output() onAdd: EventEmitter<User> = new EventEmitter<User>()
 
   tmpUser: User = {
+    createDate: new Date,
+    updateDate: new Date,
     fullName: '',
+    age: 0,
+    position: '',
+    roomNumber: '',
     email: '',
     internalPhone: '',
     mobPhone: ''
@@ -21,7 +26,7 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup
 
   constructor(
-    private us: UsersService,
+    public us: UsersService,
     
   ) {
     this._createFrom()
@@ -36,6 +41,18 @@ export class UserFormComponent implements OnInit {
   _createFrom() {
     this.userForm = new FormGroup({
       fullName: new FormControl('',
+        [
+          Validators.required
+        ]),
+      age: new FormControl('',
+        [
+          Validators.required
+        ]),
+      position: new FormControl('',
+        [
+          Validators.required
+        ]),
+      roomNumber: new FormControl('',
         [
           Validators.required
         ]),
@@ -56,5 +73,10 @@ export class UserFormComponent implements OnInit {
         ]),
       password: new FormControl()
     })
+  }
+
+  updateUser() {
+    this.tmpUser.updateDate = new Date()
+    this.us.updateUser(this.tmpUser)
   }
 }

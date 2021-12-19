@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using de_ot_portal.Contexts;
 using Microsoft.EntityFrameworkCore;
 using de_ot_portal.Classes.Adresses.Placements;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace de_ot_portal
 {
@@ -37,6 +38,14 @@ namespace de_ot_portal
             services.AddTaprs();
             services.AddUsers();
             services.AddCalculations();
+
+            // для загрузки файлов (upload) - 1
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
 
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
@@ -75,11 +84,27 @@ namespace de_ot_portal
             
             app.UseStaticFiles();
 
+            //для загрузки файлов(upload) - 2
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\uploaded_files")),
+                RequestPath = new PathString("/api/users/upload")
+            });
+
+
             app.UseFileServer(new FileServerOptions
             {
                 EnableDirectoryBrowsing = true,
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\taprs")),
                 RequestPath = new PathString("/api/taprs"),
+                EnableDefaultFiles = false
+            });
+
+            app.UseFileServer(new FileServerOptions
+            {
+                EnableDirectoryBrowsing = true,
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\filesForDownload\xmlUsers")),
+                RequestPath = new PathString("/api/users/toXmlout"),
                 EnableDefaultFiles = false
             });
 

@@ -1,10 +1,35 @@
-table#usersList{
-    td,th{
-        padding: 0 15px;
+.form-check {
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  text-align: end;
+
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+table#usersList {
+  td, th {
+    padding: 0 15px;
+
+    .sortBtn {
+      padding: 1px 5px;
+      border: 1px solid gray;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      margin-left: 3px;
     }
-    button{
-        font-size: .8rem;
-        padding: 5px 10px;
-        margin: 0;
-    }
+  }
+
+  button {
+    font-size: .8rem;
+    padding: 5px 10px;
+    margin: 0;
+  }
+}
+
+#allUsersBtn{
+    height: fit-content;
 }

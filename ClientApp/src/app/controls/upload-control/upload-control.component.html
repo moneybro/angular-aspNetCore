@@ -1,0 +1,16 @@
+<div id="uploadComponent" class="ml-2">
+  <input type="file" class="file-input" (change)="uploadFile(file.files)" #file>
+
+  <div class="file-upload">
+    <button class="btn btn-info" (click)="file.click()">Загразить файл</button>
+  </div>
+
+  <div class="">
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>

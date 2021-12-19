@@ -13,10 +13,16 @@ import { Provider } from '@angular/compiler/src/core';
 import { AuthInterceptor } from './auth.interceptor';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
-import { UserFormComponent } from './user-form/user-form.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
 import { AboutProjectComponent } from './about/about-project/about-project.component';
 import { AboutAuthorComponent } from './about/about-author/about-author.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DatePickerComponent } from './controls/date-picker/date-picker.component';
+import { UploadControlComponent } from './controls/upload-control/upload-control.component';
+import { DepartsListComponent } from './departments/departs-list/departs-list.component';
+import { DepartsFormComponent } from './departments/departs-form/departs-form.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -35,7 +41,11 @@ const INTERCEPTOR_PROVIDER: Provider = {
     UserFormComponent,
     AboutProjectComponent,
     AboutAuthorComponent,
-    UserListComponent
+    UserListComponent,
+    DatePickerComponent,
+    UploadControlComponent,
+    DepartsListComponent,
+    DepartsFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,7 +63,9 @@ const INTERCEPTOR_PROVIDER: Provider = {
       { path: 'pdf', component: PdfViewerComponent },
       { path: 'error', component: ErrorPageComponent },
       { path: '**', redirectTo: '/error' }
-    ])
+    ]),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     DatePipe,

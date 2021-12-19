@@ -1,31 +1,66 @@
-<div class="container">
-  <button class="btn btn-success mb-3" (click)=us.addNewUser()>Добавить пользователя</button>
+<div class="container-fluid">
+  <div class="d-flex">
+    <div class="d-flex col-9">
+      <button class="btn btn-success mb-3 mr-5" (click)=us.addNewUser()>Добавить пользователя</button>
+      <app-date-picker class="mr-3" (dateRangeChanged)="onDateRangeChanged($event)">
+      </app-date-picker>
+      <button id="allUsersBtn" class="btn btn-success" (click)="displayAllUsers()">Все записи (+сброс сортировки)</button>
+    </div>
+    <div class="col-3">
+      <div class="form-check">
+        <input id="sortBySeveralColumnsCheckbox"
+               class="form-check-input"
+               type="checkbox"
+               (change)="sortBySeveralColumnsCheckbox()"
+               [(ngModel)]="sortBySeveralColumns">
+        <label class="form-check-label" for="flexCheckDefault">
+          Сорт-ка по нескольким колонками
+        </label>
+      </div>
+    </div>  
+    </div>
 
-  <table id="usersList" class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Id</th>
-        <th scope="col">ФИО</th>
-        <th scope="col">Мобильный</th>
-        <th scope="col">Внутренний</th>
-        <th scope="col">Эл. почта</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of us.users; let i=index">
-        <th scope="row">{{i + 1}}</th>
-        <td>{{user.id}}</td>
-        <td>{{user.fullName}}</td>
-        <td>{{user.mobPhone}}</td>
-        <td>{{user.internalPhone}}</td>
-        <td>{{user.email}}</td>
-        <td><button class="btn btn-warning fs-6" (click)=us.editUser(user.id)>edit</button></td>
-        <td><button class="btn btn-danger fs-6" (click)=us.deleteUser(user.id)>X</button></td>
-      </tr>
-    </tbody>
-  </table>
+    <table id="usersList" class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id<i class="bi bi-arrow-down sortBtn" (click)="changeSort('id')"></i></th>
+          <th scope="col">Дата рег.<i class="bi bi-arrow-down sortBtn" (click)="changeSort('createDate')"></i></th>
+          <th scope="col">Дата обновл.<i class="bi bi-arrow-down sortBtn" (click)="changeSort('updateDate')"></i></th>
+          <th scope="col">ФИО<i class="bi bi-arrow-down sortBtn" (click)="changeSort('fullName')"></i></th>
+          <th scope="col">Возраст<i class="bi bi-arrow-down sortBtn" (click)="changeSort('age')"></i></th>
+          <th scope="col">Должность<i class="bi bi-arrow-down sortBtn" (click)="changeSort('position')"></i></th>
+          <th scope="col">Кабинет<i class="bi bi-arrow-down sortBtn" (click)="changeSort('roomNumber')"></i></th>
+          <th scope="col">Внутренний<i class="bi bi-arrow-down sortBtn" (click)="changeSort('internalPhone')"></i></th>
+          <th scope="col">Мобильный<i class="bi bi-arrow-down sortBtn" (click)="changeSort('mobPhone')"></i></th>
+          <th scope="col">Эл. почта<i class="bi bi-arrow-down sortBtn" (click)="changeSort('email')"></i></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of us.users; let i=index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{user.id}}</td>
+          <td>{{user.createDate | date : "dd.MM.YYYY"}}</td>
+          <td>{{user.updateDate | date : "dd.MM.YYYY"}}</td>
+          <td>{{user.fullName}}</td>
+          <td>{{user.age}}</td>
+          <td>{{user.position}}</td>
+          <td>{{user.roomNumber}}</td>
+          <td>{{user.internalPhone}}</td>
+          <td>{{user.mobPhone}}</td>
+          <td>{{user.email}}</td>
+          <td><button class="btn btn-warning fs-6" (click)=us.editUser(user.id)>edit</button></td>
+          <td><button class="btn btn-danger fs-6" (click)=us.deleteUser(user.id)>X</button></td>
+        </tr>
+      </tbody>
+    </table>
 
-</div>
+
+    <div class="d-flex">
+      <button class="btn btn-info" (click)="loadGoodData()">Загрузить исходные данные</button>
+      <app-upload-control (onUploadFinished)="refreshUsersList()"></app-upload-control>
+      <button class="btn btn-info" (click)="us.exportUsersToXml()">Экспорт в XML</button>
+    </div>
+  </div>
