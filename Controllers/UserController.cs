@@ -61,7 +61,7 @@ namespace de_ot_portal.Controllers
         /// <returns>true если добавление в базу прошло успешно, false если добавление в бд не удалось</returns>
         // POST api/<UserController>
         [HttpPost("add")]
-        public bool Post([FromBody] User user)
+        public bool Post([FromBody] object user)
         {
             return _users.addUser(user);
         }

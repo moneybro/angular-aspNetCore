@@ -23,6 +23,8 @@ import { DatePickerComponent } from './controls/date-picker/date-picker.componen
 import { UploadControlComponent } from './controls/upload-control/upload-control.component';
 import { DepartsListComponent } from './departments/departs-list/departs-list.component';
 import { DepartsFormComponent } from './departments/departs-form/departs-form.component';
+import { UserListByDepComponent } from './users/user-list/user-list-by-dep/user-list-by-dep.component';
+import { UsersInDepPipe } from './users/user-list/user-list-by-dep/users-in-dep.pipe';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -45,7 +47,9 @@ const INTERCEPTOR_PROVIDER: Provider = {
     DatePickerComponent,
     UploadControlComponent,
     DepartsListComponent,
-    DepartsFormComponent
+    DepartsFormComponent,
+    UserListByDepComponent,
+    UsersInDepPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -57,6 +61,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'about/author', component: AboutAuthorComponent },
       { path: 'about/project', component: AboutProjectComponent },
+      { path: 'deps', component: DepartsListComponent },
+      { path: 'deps/form', component: DepartsFormComponent },
       { path: 'input-form', component: InputFormComponent },
       { path: 'userslist', component: UserListComponent },
       { path: 'user-form', component: UserFormComponent },

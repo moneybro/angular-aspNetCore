@@ -1,0 +1,50 @@
+﻿[
+  {
+    "Id": 0,
+    "IndexNumber": 0,
+    "CreateDate": "0001-01-01T00:00:00",
+    "UpdateDate": "2021-11-29T15:22:26.961Z",
+    "FullName": "Не распределен",
+    "ShortName": "Нет"
+  },
+  {
+    "Id": 1,
+    "IndexNumber": 1,
+    "CreateDate": "0001-01-01T00:00:00",
+    "UpdateDate": "2021-11-29T15:22:26.961Z",
+    "FullName": "Руководство",
+    "ShortName": "Рук-во"
+  },
+  {
+    "Id": 2,
+    "IndexNumber": 2,
+    "CreateDate": "0001-01-01T00:00:00",
+    "UpdateDate": "2021-11-29T15:22:26.961Z",
+    "FullName": "ДЕПАРТАМЕНТ ПРОТОКОЛА",
+    "ShortName": "ДП"
+  },
+  {
+    "Id": 3,
+    "IndexNumber": 3,
+    "CreateDate": "0001-01-01T00:00:00",
+    "UpdateDate": "2021-11-29T15:22:26.961Z",
+    "FullName": "ДЕПАРТАМЕНТ ПРЕСС-СЛУЖБЫ И ИНФОРМАЦИИ ",
+    "ShortName": "ДПСИ"
+  },
+  {
+    "Id": 4,
+    "IndexNumber": 4,
+    "CreateDate": "0001-01-01T00:00:00",
+    "UpdateDate": "2021-11-29T15:22:26.961Z",
+    "FullName": "СЕКРЕТАРИАТ",
+    "ShortName": "СЕКР-Т"
+  },
+  {
+    "Id": 5,
+    "IndexNumber": 5,
+    "CreateDate": "0001-01-01T00:00:00",
+    "UpdateDate": "2021-11-29T15:22:26.961Z",
+    "FullName": "ДЕПАРТАМЕНТ НЕДВИЖИМОСТИ",
+    "ShortName": "ДН"
+  }
+]

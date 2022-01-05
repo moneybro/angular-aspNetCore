@@ -3,6 +3,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { User, UsersService } from '../../services/users.service';
 import { environment } from '../../../environments/environment';
 import { isUndefined } from 'util';
+import { DepartmentsService } from '../../services/departments.service';
 
 @Component({
   selector: 'app-user-list',
@@ -22,13 +23,13 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private us: UsersService
+    public us: UsersService,
+    public depserv: DepartmentsService
   ) {
 
   }
 
   ngOnInit(): void {
-    //this.getRange()
   }
 
   sortBySeveralColumnsCheckbox() {
@@ -52,6 +53,7 @@ export class UserListComponent implements OnInit {
 
   displayAllUsers() {
     this.sortBySeveralColumns = false
+    this.us.dateRangeInUse = false
     this.us.getAllUsers()
   }
 
@@ -92,6 +94,11 @@ export class UserListComponent implements OnInit {
           this.us.getAllUsers()
         }
       })
+  }
+
+  listUsersByDeps() {
+    this.us.viewUsersByDeps = !this.us.viewUsersByDeps
+    
   }
 }
 

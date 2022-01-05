@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Input } from '@angular/core';
+import { Injectable, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -16,6 +16,7 @@ export interface User {
   email: string,
   internalPhone: string,
   mobPhone: string,
+  depId?: number
 }
 
 export interface Sorter {
@@ -47,14 +48,15 @@ export class UsersService {
   ]
 
   public usersDownloaded: boolean
-  
+  public viewUsersByDeps: boolean = false
+  public dateRangeInUse: boolean = false
+
   constructor(
     private http: HttpClient,
     private router: Router
   ) {
     this.getAllUsers()
-    
-    }
+  }
 
   getAllUsers() {
     this.http.get<User[]>(this.hosting + "/api/users")
@@ -63,8 +65,8 @@ export class UsersService {
         this.sortBySeveralColumns()
         //this.sortArr("fullName", true)
         this.usersDownloaded = true
-        //this.dateRange[0] = this.allUsers.reduce((a, b) => new Date(a.updateDate) < new Date(b.updateDate) ? a : b).updateDate // находит самую раннюю дату в массиве
-        //this.dateRange[1] = this.allUsers.reduce((a, b) => new Date(a.updateDate) > new Date(b.updateDate) ? a : b).updateDate // находит самую позднюю дату в массиве
+        //this.allUsers.reduce((a, b) => new Date(a.updateDate) < new Date(b.updateDate) ? a : b).updateDate // находит самую раннюю дату в массиве
+        //this.allUsers.reduce((a, b) => new Date(a.updateDate) > new Date(b.updateDate) ? a : b).updateDate // находит самую позднюю дату в массиве
       })
   }
 
@@ -110,6 +112,12 @@ export class UsersService {
     return tmptmpuser
   }
 
+  getUsersByDepId(id: number): User[] {
+    let internalId = +id;
+    const filteredUsers = this.users.filter(p => p.depId === internalId)
+    return filteredUsers
+  }
+
   editUser(id: number) {
     this.userFormEditMode = true
     this.userFormNewUserMode = false
@@ -134,8 +142,8 @@ export class UsersService {
           this.http.get<User[]>(this.hosting + "/api/users")
             .subscribe(result => {
               this.users = this.allUsers = result
-              this.sortArr("fullName", true)
-              this.selectUsersByDateRange(this.dateRange)
+              //this.sortArr("fullName", true)
+              if (this.dateRangeInUse) this.selectUsersByDateRange(this.dateRange)
             })
         }
       })

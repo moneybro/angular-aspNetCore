@@ -46,5 +46,35 @@ namespace de_ot_portal.Classes.Users
         {
             throw new NotImplementedException();
         }
+
+        public List<User> getUserByDepId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool updateRealUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool deleteUsers(int[] id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool updateUsers(List<User> users)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> getUsersByDepId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool addUsers(List<User> usersToModify)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,1 +1,22 @@
-<p>departs-form works!</p>
+<div class="container">
+  <h1 class="mb-3">Департамент</h1>
+  <div class="d-flex flex-row" [formGroup]="depForm">
+    <label class="col-6">Короткое наим-е</label>
+    <input class="col-6" type="text"
+           [(ngModel)]="tmpDep.shortName"
+           formControlName="shortName"
+           placeholder="Короткое наим-е" />
+  </div>
+  <div class="d-flex flex-row" [formGroup]="depForm">
+    <label class="col-6">Полное наим-е</label>
+    <input class="col-6" type="text"
+           [(ngModel)]="tmpDep.fullName"
+           formControlName="fullName"
+           placeholder="Полное наим-е" />
+  </div>
+
+  <button class="btn btn-success mt-3" *ngIf="ds.depFormNewdepMode" (click)="ds.addDep(tmpDep)" [disabled]="depForm.invalid">Сохранить</button>
+  <button class="btn btn-warning mt-3" *ngIf="ds.depFormEditMode" (click)="updatedep()" [disabled]="depForm.invalid">Сохранить изменения</button>
+  <a class="btn btn-dark ml-3 mt-3" [routerLink]="['/deps']">Отмена</a>
+</div>
+

@@ -16,6 +16,7 @@ using de_ot_portal.Contexts;
 using Microsoft.EntityFrameworkCore;
 using de_ot_portal.Classes.Adresses.Placements;
 using Microsoft.AspNetCore.Http.Features;
+using de_ot_portal.Classes.Departments;
 
 namespace de_ot_portal
 {
@@ -38,6 +39,7 @@ namespace de_ot_portal
             services.AddTaprs();
             services.AddUsers();
             services.AddCalculations();
+            services.AddScoped<IDepartments, DepartmentFromJSON>();
 
             // для загрузки файлов (upload) - 1
             services.Configure<FormOptions>(o =>

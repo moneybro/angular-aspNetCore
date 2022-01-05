@@ -17,13 +17,14 @@ namespace de_ot_portal.Classes.Users
     /// </summary>
     public class UserFromJSON : IUsers
     {
-        string alluserstxt = File.ReadAllText(@"Classes\Users\users.json");
+        
         /// <summary>
         /// метода возвращает коллекцию пользователей
         /// </summary>
         /// <returns>коллекция пользователей</returns>
         public List<User> GetUsers()
         {
+            string alluserstxt = File.ReadAllText(@"Classes\Users\users.json");
             List<User> u = new List<User>();
             u = JsonConvert.DeserializeObject<List<User>>(alluserstxt);
             return u;
@@ -59,9 +60,16 @@ namespace de_ot_portal.Classes.Users
             {
                 Console.WriteLine($"user {stranger.FullName} with id:{stranger.Id} exist. not added to db");
                 return false;
-            }
-            
+            }   
         }
+
+        public bool addUsers(List<User> usersToAdd)
+        {
+            List<User> users = GetUsers();
+            users.AddRange(usersToAdd);
+            return serializeAndWriteToFile(users);
+        }
+
         /// <summary>
         /// метод предназначен для выбора пользователя по id
         /// </summary>
@@ -72,6 +80,13 @@ namespace de_ot_portal.Classes.Users
             var users = GetUsers();
             return users.Find(user => user.Id == id);
         }
+
+        public List<User> getUsersByDepId(int depId)
+        {
+            var users = GetUsers();
+            return users.FindAll(user => user.DepId == depId);
+        }
+
         /// <summary>
         /// метод обновления пользователя
         /// </summary>
@@ -86,7 +101,6 @@ namespace de_ot_portal.Classes.Users
             }
             catch (Exception)
             {
-
                 return false;
             }
             var allusers = GetUsers();
@@ -94,6 +108,7 @@ namespace de_ot_portal.Classes.Users
             allusers.Add(updatedUser);
             return serializeAndWriteToFile(allusers);
         }
+
         /// <summary>
         /// метод удаляет пользователя из БД
         /// </summary>
@@ -103,6 +118,16 @@ namespace de_ot_portal.Classes.Users
         {
             var allusers = GetUsers();
             allusers.RemoveAll(item => item.Id == id);
+            return serializeAndWriteToFile(allusers);
+        }
+
+        public bool deleteUsers(int[] usersIds)
+        {
+            var allusers = GetUsers();
+            foreach (var userId in usersIds)
+            {
+                allusers.RemoveAll(item => item.Id == userId);
+            }
             return serializeAndWriteToFile(allusers);
         }
         /// <summary>
@@ -247,14 +272,21 @@ namespace de_ot_portal.Classes.Users
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<User>));
 
-            string path = @"D:\repos\DePortal_ng+c#\wwwroot\filesForDownload\xmlUsers\";
+            string path = @"wwwroot\filesForDownload\xmlUsers\";
             DirectoryInfo dirInfo = new DirectoryInfo(path);
             if (!dirInfo.Exists)
             {
                 dirInfo.Create();
             }
+            filename += DateTime.Now.Day.ToString() +
+                DateTime.Now.Month.ToString() +
+                DateTime.Now.Year.ToString() + "_" +
+                DateTime.Now.Hour.ToString() +
+                DateTime.Now.Minute.ToString() +
+                DateTime.Now.Second.ToString() +
+                ".xml";
 
-            filename += DateTime.Now.ToShortDateString() + ".xml";
+            //filename += DateTime.Now.ToShortDateString() + ".xml";
             string fullname = path + filename;
 
             if (File.Exists(fullname))

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { min } from 'rxjs/operators';
+import { DepartmentsService } from '../../services/departments.service';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class DatePickerComponent implements OnInit {
   });
 
   constructor(
-    private us: UsersService
+    public us: UsersService
   ) {
   }
 
@@ -30,9 +31,13 @@ export class DatePickerComponent implements OnInit {
   @Output() dateRangeChanged = new EventEmitter();
 
   public onValueChange(value: Date[]): void {
-    console.log(value);
-    this.dateRangeChanged.emit(value);
+    //this.dateRangeChanged.emit(value);
     this.us.startDate = value[0]
     this.us.endDate = value[1]
+  }
+
+  public useDateRange() {
+    this.us.dateRangeInUse = true;
+    this.dateRangeChanged.emit([this.us.startDate, this.us.endDate]);
   }
 }

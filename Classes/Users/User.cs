@@ -15,6 +15,7 @@ namespace de_ot_portal.Classes.Users
         public string FullName { get; set; }
         public int Age { get; set; }
         public string ShortName { get; set; }
+        public int DepId { get; set; }
         public string Position { get; set; }
         public string RoomNumber { get; set; }
         public string Email { get; set; }

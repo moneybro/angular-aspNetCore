@@ -7,11 +7,10 @@
              #daterangepicker="bsDaterangepicker"
              (bsValueChange)="onValueChange($event)"
              bsDaterangepicker
-             [bsValue]="dateRange"
              [bsConfig]="{ rangeInputFormat : 'DD.MM.YYYY', dateInputFormat: 'DD.MM.YYYY', showWeekNumbers: false }">
     </div>
     <div class="col-xs-12 col-12 col-md-3 form-group mb-3 ml-0 pl-0">
-      <button class="btn btn-success" (click)="daterangepicker.toggle()" [attr.aria-expanded]="daterangepicker.isOpen" type="button">Даты</button>
+      <button class="btn btn-success" (click)="useDateRange()" type="button">Применить</button>
     </div>
   </div>
  </form>

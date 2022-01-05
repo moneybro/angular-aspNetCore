@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.18" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.18">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -58,7 +58,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\dist\" />
-    <Folder Include="ClientApp\src\app\departments\" />
     <Folder Include="wwwroot\filesForDownload\xmlUsers\" />
     <Folder Include="wwwroot\uploaded_files\" />
   </ItemGroup>

@@ -1,0 +1,35 @@
+<div class="container-fluid d-flex flex-column">
+
+  <div id="tableHeader" class="d-flex">
+    <p id="porNum" class="pl-1">#</p>
+    <p id="userId" class="">ID</p>
+    <p id="createDate" class="date">Дата рег.</p>
+    <p id="updateDate" class="date">Дата обновл.</p>
+    <p id="userFullName" class="">ФИО</p>
+    <p id="userAge" class="">Воз-т</p>
+    <p id="userPosition" class="">Должность</p>
+    <p id="userRoomNumber" class="">Каб.</p>
+    <p id="userInternalPhone" class="">Вн.тел.</p>
+    <p id="userMobPhone" class="">Моб. тел.</p>
+    <p id="userEmail" class="">Эл. почта</p>
+  </div>
+
+  <div id="deps" class="mb-1" *ngFor="let dep of depserv.deps">
+    <p class="depName d-block p-2 pl-3 m-0">{{dep.fullName}}</p>
+    <div class="depUsers d-flex flex-row pl-2" *ngFor="let user of us2.users | usersInDep:dep.id; let i = index">
+      <p id="porNum" class="pl-1">{{i + 1}}</p>
+      <p id="userId" class="">{{user.id}}</p>
+      <p id="createDate" class="date">{{user.createDate | date : "dd.MM.YYYY"}}</p>
+      <p id="updateDate" class="date">{{user.updateDate | date : "dd.MM.YYYY"}}</p>
+      <p id="userFullName" class="">{{user.fullName}}</p>
+      <p id="userAge" class="">{{user.age}}</p>
+      <p id="userPosition" class="">{{user.position}}</p>
+      <p id="userRoomNumber" class="">{{user.roomNumber}}</p>
+      <p id="userInternalPhone" class="">{{user.internalPhone}}</p>
+      <p id="userMobPhone" class="">{{user.mobPhone}}</p>
+      <p id="userEmail" class="">{{user.email}}</p>
+      <p><button class="btn btn-warning fs-6 mr-1" (click)=us2.editUser(user.id)>edit</button></p>
+      <p><button class="btn btn-danger fs-6" (click)=us2.deleteUser(user.id)>X</button></p>
+    </div>
+  </div>
+</div>

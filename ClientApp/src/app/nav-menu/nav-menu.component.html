@@ -14,9 +14,25 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" href="api/taprs" target="_blank">ТАПРы</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/userslist']">Пользователи</a>
-          </li>
+
+          <div class="dropdown">
+            <button class="btn text-muted dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              Структура пр-я
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/deps']">Департаменты</a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/userslist']">Пользователи</a>
+              </li>
+            </ul>
+          </div>
+
+
+
+          
           <li>
             <div class="dropdown">
               <button class="btn text-muted dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -27,7 +43,6 @@
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
                   <a class="nav-link" [routerLink]="['/about/author']">Об авторе</a>
                 </li>
-
               </ul>
             </div>
           </li>

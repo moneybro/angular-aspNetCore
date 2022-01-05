@@ -1,0 +1,69 @@
+#tableHeader{
+  p{
+      display: flex;
+      font-weight: 600;
+  }
+}
+#deps {
+  .depName {
+    font-weight: bolder;
+    background-color: #bebebe;
+  }
+
+  .depUsers {
+    padding: 0 0 0 15px !important;
+    margin: 0 !important;
+
+    p {
+      padding: 0 !important;
+      margin: 0;
+
+      button {
+        padding: 0 10px;
+        font-size: .8rem;
+      }
+    }
+  }
+}
+
+
+#porNum {
+  width: 2rem;
+  font-weight: bolder;
+}
+
+#userId {
+  width: 2rem;
+}
+
+.date {
+  width: 10rem;
+}
+
+#userFullName {
+  width: 25rem;
+}
+
+#userAge {
+  width: 4rem;
+}
+
+#userPosition {
+  width: 10rem;
+}
+
+#userRoomNumber {
+  width: 3rem;
+}
+
+#userInternalPhone {
+  width: 3rem;
+}
+
+#userMobPhone {
+  width: 7rem;
+}
+
+#userEmail {
+  width: 10rem;
+}

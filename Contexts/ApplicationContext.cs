@@ -7,6 +7,7 @@ using de_ot_portal.Classes.Adresses.Placements;
 using de_ot_portal.Classes.Taprs;
 using de_ot_portal.Classes.Adresses.Calculations;
 using de_ot_portal.Classes.Users;
+using de_ot_portal.Classes.Departments;
 
 namespace de_ot_portal.Contexts
 {
@@ -55,5 +56,9 @@ namespace de_ot_portal.Contexts
         {
             await base.DisposeAsync();
         }
+
+        
+
+        public DbSet<de_ot_portal.Classes.Departments.Department> Department { get; set; }
     }
 }

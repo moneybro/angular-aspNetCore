@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <button class="btn btn-success mb-3 mr-5" (click)=ds.addNewDep()>Добавить департамент</button>
+  <table id="depsList" class="table table-striped">
+    <thead>
+      <tr>
+        <!--<th scope="col">#</th>-->
+        <!--<th scope="col">Id<i class="bi bi-arrow-down sortBtn" (click)="changeSort('id')"></i></th>-->
+        <th scope="col">№ п/п<i class="bi bi-arrow-down sortBtn"></i></th>
+        <th scope="col">Дата рег.</th>
+        <th scope="col">Дата обновл.</th>
+        <th scope="col">Короткое наим.</th>
+        <th scope="col">Наим-е</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dep of ds.deps; let i=index">
+        <!--<th scope="row">{{i + 1}}</th>-->
+        <!--<td>{{dep.id}}</td>-->
+        <td>{{dep.indexNumber}}</td>
+        <td>{{dep.createDate | date : "dd.MM.YYYY"}}</td>
+        <td>{{dep.updateDate | date : "dd.MM.YYYY"}}</td>
+        <td>{{dep.shortName}}</td>
+        <td>{{dep.fullName}}</td>
+        <td><button class="btn btn-danger fs-6" (click)=ds.deleteDep(dep.id)>X</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex">
+    <button class="btn btn-info" (click)="loadGoodData()">Загрузить из бэкапа</button>
+  </div>
+</div>
